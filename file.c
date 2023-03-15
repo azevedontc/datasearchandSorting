@@ -29,7 +29,12 @@ void lerTxt() {
 void criartxtOrdenado(int tam){
   FILE * ponteiro;
   char nomeArquivo[255];
+<<<<<<< HEAD
+  sprintf(nomeArquivo, "Ordenado%d.txt", tam);
+  // cria o nome do arquivo de acordo com o tamanho
+=======
   sprintf(nomeArquivo, "Ordenado%dk.txt", tam);
+>>>>>>> a1016d252cc35d460c87b2442708743f5f47ca1b
   ponteiro = fopen(nomeArquivo, "w");
 
   if(ponteiro ==NULL){

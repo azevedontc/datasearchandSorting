@@ -9,7 +9,11 @@ int main() {
   
   while (opcao != 5) {
     printf("\nEscolha uma opcao:\n\n");
+<<<<<<< HEAD
+    printf("1 - Ler arquivo txt e guardar no Vetor\n");
+=======
     printf("1 - Ler Arquivo txt e guardar no Vetor\n");
+>>>>>>> a1016d252cc35d460c87b2442708743f5f47ca1b
     printf("2 - Criar Arquivo txt ordenado\n");
     printf("3 - BubbleSort\n");
     printf("4 - InsertSort\n");
