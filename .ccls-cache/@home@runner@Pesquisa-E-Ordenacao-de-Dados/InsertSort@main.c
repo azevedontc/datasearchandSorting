@@ -11,4 +11,4 @@ void insert(int vetor []){
       vetor[y+1] = aux;
     }
   }
-  }
+}
