@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_SIZE 100
-#define LIM 500000
-
 void bubbleSort(int array[], int n) {
   int i, j;
   for (i = 0; i < n - 1; i++) {
@@ -17,44 +14,12 @@ void bubbleSort(int array[], int n) {
   }
 }
 
-void lerTxt(){
-    FILE *fp;
-    int arr[MAX_SIZE];
-    int i, size = 0;
-
-    fp = fopen("numbers.txt", "r");
-    if (fp == NULL) {
-        printf("Error opening file.\n");
-        exit(1);
-    }
-
-    while (fscanf(fp, "%d", &arr[size]) != EOF) {
-        size++;
-    }
-
-    fclose(fp);
-
-    bubbleSort(arr, size);
-
-    printf("Sorted array:\n");
-    for (i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
-
-void criarTxtordenado(int tam){
-  FILE * ponteiro;
-  char nomeArquivo[255];
-  sprintf(nomeArquivo, "Ordenado%dk.txt", tam);
-  ponteiro = fopen(nomeArquivo, "w");
-
-  if(ponteiro ==NULL){
-    printf("Não foi possível criar o arquivo");
-    exit(0);
-  }
-  
-  for(int cont = 1; cont <= tam; cont++){
-    fprintf(ponteiro, "%d\n", cont);
-  }
-}
+// int main() {
+//   int array[] = {64, 34, 25, 12, 22, 11, 90};
+//   int n = sizeof(array) / sizeof(array[0]);
+//   insertionSort(array, n);
+//   printf("Array ordenado: \n");
+//   for (int i = 0; i < n; i++)
+//     printf("%d ", array[i]);
+//   return 0;
+// }

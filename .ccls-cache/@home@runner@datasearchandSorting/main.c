@@ -9,12 +9,8 @@ int main() {
   // printf("Array ordenado: \n");
   // for (int i = 0; i < n; i++)
   // printf("%d ", array[i]);
-
-  criarTxtordenado(500000);
-
-  criarTxtordenado(750000);
-
-  criarTxtordenado(1000000);
+  
+  lerTxt();
   
   return 0;
 }
