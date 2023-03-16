@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include "header.h"
 
 #define MAX_REGISTROS 1000
 
-void lerTxt() {
+void lerTxt(int tam) {
     FILE *ponteiro;
     int num[100]; // vetor para armazenar os valores lidos
     int i = 0;
+    char line[100];
 
     ponteiro = fopen("Ler.txt", "r");
     if (ponteiro == NULL) {
@@ -17,10 +19,13 @@ void lerTxt() {
     }
 
     // ler os valores do arquivo e armazená-los no vetor
-    while (fscanf(ponteiro, "%d", &num[i]) != EOF) {
+    while (fgets(line, sizeof(line), ponteiro) != NULL && i < tam) {
+      num[i] = atof(line); // converte usando ATOF
       i++;
     }
-
+  
+    bubbleSort(num, tam);
+  
     // imprime os valores armazenados no vetor
     for (int j = 0; j < i; j++) {
       printf("%d ", num[j]);
@@ -31,6 +36,7 @@ void lerTxt() {
 void criartxtOrdenado(int tam){
   FILE * ponteiro;
   char nomeArquivo[255];
+  clock_t fim, inicio = clock(); // pega horario do inicio
   sprintf(nomeArquivo, "Ordenado%d.txt", tam);
   // cria o nome do arquivo de acordo com o tamanho
   ponteiro = fopen(nomeArquivo, "w");
@@ -44,11 +50,16 @@ void criartxtOrdenado(int tam){
   for(int cont = 1; cont <= tam; cont++){
     fprintf(ponteiro, "%d\n", cont);
   }
+  fim = clock(); // pega horario do final
+  double tempo = (fim - inicio) / CLOCKS_PER_SEC;
+  printf("\nTempo gasto %.2f\n", tempo);
+  fclose(ponteiro);
 }
 
 void criartxtInvertido(int tam){
   FILE * ponteiro;
   char nomeArquivo[255];
+  clock_t fim, inicio = clock(); // pega horario do inicio
   sprintf(nomeArquivo, "Invertido%d.txt", tam);
   // cria o nome do arquivo de acordo com o tamanho
   ponteiro = fopen(nomeArquivo, "w");
@@ -62,25 +73,39 @@ void criartxtInvertido(int tam){
   for(int cont = tam; cont >= 1; cont--){
     fprintf(ponteiro, "%d\n", cont);
   }
+  fim = clock(); // pega horario do final
+  double tempo = (fim - inicio) / CLOCKS_PER_SEC;
+  printf("\nTempo gasto %.2f\n", tempo);
+  fclose(ponteiro);
 }
 
-// função para gerar um número aleatório entre min e max
-int gerar_numero_aleatorio(int min, int max) {
-    return rand() % (max - min + 1) + min;
-}
-
-void criartxtAleatorio(char * nome_arquivo, int num_registros) {
-    FILE * arquivo = fopen(nome_arquivo, "w");
-    if (arquivo == NULL) {
-        printf("Não foi possível criar o arquivo %s\n", nome_arquivo);
-        return;
+void criartxtAleatorio(char *nomeArquivo, int tam, int val) {
+    int i, j, temp, array[tam];
+    FILE *fptr;
+    fptr = fopen(nomeArquivo, "w");
+    if (fptr == NULL) {
+        printf("Não foi possível criar o arquivo");
+        exit(1);
     }
 
     srand(time(NULL));
-    for (int i = 0; i < num_registros; i++) {
-        int numero = gerar_numero_aleatorio(1, 1000);
-        fprintf(arquivo, "%d\n", numero);
+    for (i = 0; i < tam; i++) {
+        array[i] = rand() % val;
+        fprintf(fptr, "%d\n", array[i]);
     }
 
-    fclose(arquivo);
+    bubbleSort(array, tam);
+
+    fclose(fptr);
+
+    fptr = fopen(nomeArquivo, "w");
+    if (fptr == NULL) {
+        printf("Não foi possível criar o arquivo");
+        exit(1);
+    }
+
+    for (i = 0; i < tam; i++) {
+        fprintf(fptr, "%d\n", array[i]);
+    }
+    fclose(fptr);
 }
