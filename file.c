@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "header.h"
+
+#define MAX_REGISTROS 1000
 
 void lerTxt() {
     FILE *ponteiro;
@@ -25,19 +28,14 @@ void lerTxt() {
     fclose(ponteiro);
 }
 
-
 void criartxtOrdenado(int tam){
   FILE * ponteiro;
   char nomeArquivo[255];
-<<<<<<< HEAD
   sprintf(nomeArquivo, "Ordenado%d.txt", tam);
   // cria o nome do arquivo de acordo com o tamanho
-=======
-  sprintf(nomeArquivo, "Ordenado%dk.txt", tam);
->>>>>>> a1016d252cc35d460c87b2442708743f5f47ca1b
   ponteiro = fopen(nomeArquivo, "w");
 
-  if(ponteiro ==NULL){
+  if(ponteiro == NULL){
     printf("Não foi possível criar o arquivo");
     exit(0);
   }
@@ -46,4 +44,43 @@ void criartxtOrdenado(int tam){
   for(int cont = 1; cont <= tam; cont++){
     fprintf(ponteiro, "%d\n", cont);
   }
+}
+
+void criartxtInvertido(int tam){
+  FILE * ponteiro;
+  char nomeArquivo[255];
+  sprintf(nomeArquivo, "Invertido%d.txt", tam);
+  // cria o nome do arquivo de acordo com o tamanho
+  ponteiro = fopen(nomeArquivo, "w");
+
+  if(ponteiro == NULL){
+    printf("Não foi possível criar o arquivo");
+    exit(0);
+  }
+
+  // imprime os valores no arquivo .txt
+  for(int cont = tam; cont >= 1; cont--){
+    fprintf(ponteiro, "%d\n", cont);
+  }
+}
+
+// função para gerar um número aleatório entre min e max
+int gerar_numero_aleatorio(int min, int max) {
+    return rand() % (max - min + 1) + min;
+}
+
+void criartxtAleatorio(char * nome_arquivo, int num_registros) {
+    FILE * arquivo = fopen(nome_arquivo, "w");
+    if (arquivo == NULL) {
+        printf("Não foi possível criar o arquivo %s\n", nome_arquivo);
+        return;
+    }
+
+    srand(time(NULL));
+    for (int i = 0; i < num_registros; i++) {
+        int numero = gerar_numero_aleatorio(1, 1000);
+        fprintf(arquivo, "%d\n", numero);
+    }
+
+    fclose(arquivo);
 }
