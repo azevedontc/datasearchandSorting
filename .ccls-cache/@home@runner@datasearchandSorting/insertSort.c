@@ -1,27 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-void insertSortSort(int array[], int n) {
-  int i, key, j;
+void insertionSort(int array[], int n) {
+  clock_t fim, inicio = clock();
+  int i, aux, j;
   for (i = 1; i < n; i++) {
-    key = array[i];
+    aux = array[i];
     j = i - 1;
-
-    /* Move os elementos do array[0...i-1], que são
-       maiores que a chave, uma posição para frente */
-    while (j >= 0 && array[j] > key) {
+    while (j >= 0 && array[j] > aux) {
       array[j + 1] = array[j];
       j = j - 1;
     }
-    array[j + 1] = key;
+    array[j + 1] = aux;
   }
-}
-
-int main() {
-  int array[] = {64, 34, 25, 12, 22, 11, 90};
-  int n = sizeof(array) / sizeof(array[0]);
-  insertSortSort(array, n);
-  printf("Array ordenado: \n");
-  for (int i = 0; i < n; i++)
-    printf("%d ", array[i]);
-  return 0;
 }

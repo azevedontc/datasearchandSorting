@@ -1,0 +1,4 @@
+Tempo de execucao do arquivo files/crescente500000.txt usando o algoritimo InsertSort: 0.000000 segundos
+Tempo de execucao do arquivo files/crescente750000.txt usando o algoritimo InsertSort: 0.000000 segundos
+Tempo de execucao do arquivo files/crescente500000.txt usando o algoritimo BublleSort: 122.000000 segundos
+Tempo de execucao do arquivo files/decrescente500000.txt usando o algoritimo SelectionSort: 76.000000 segundos
