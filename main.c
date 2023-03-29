@@ -1,8 +1,8 @@
+#include "header.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "header.h"
 
 int main() {
   clock_t inicio, fim;
@@ -12,6 +12,9 @@ int main() {
   int quantidade_numeros = 0;
 
   printaMenu();
+  scanf("%d", &tipoArquivo);
+
+  printaMenu2();
   scanf("%d", &op);
   switch (op) {
   case 1:
@@ -24,12 +27,12 @@ int main() {
     tam = 1000000;
     break;
   default:
-    tam = 1000;
+    tam = 500000;
     break;
   }
-  
-  printaMenu2();
-  scanf("%d", &tipoArquivo);
+
+  double *numeros = malloc(tam * sizeof(double));
+
   switch (tipoArquivo) {
   case 1:
     gerarCrescente(tam);
@@ -44,11 +47,14 @@ int main() {
     gerarAleatorio(tam, tam);
     break;
   default:
-    printf("Opcao invalida.\n");
+    printf("Opção inválida!\n");
     break;
   }
 
-  double *numeros = malloc(tam * sizeof(double));
+  if (lerArquivo(nomeArquivo, numeros, tam) != 0) {
+    printf("Erro ao ler o arquivo!\n");
+    return 1;
+  }
 
   printaMenu3();
   scanf("%d", &opcaoAlgoritmo);
@@ -58,43 +64,49 @@ int main() {
     bubbleSort(tam, numeros);
     fim = clock();
     sprintf(nomeAlgoritimo, "BublleSort");
-  break;
-    
+    break;
+
   case 2:
     inicio = clock();
     insertSort(tam, numeros);
     fim = clock();
     sprintf(nomeAlgoritimo, "InsertSort");
-  break;
-    
+    break;
+
   case 3:
     inicio = clock();
     selectionSort(tam, numeros);
     fim = clock();
     sprintf(nomeAlgoritimo, "SelectionSort");
-  break;
-    
+    break;
+
+  case 4:
+    inicio = clock();
+    shellSort(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "ShellSort");
+    break;
+
   default:
     printf("Opção inválida.\n");
     break;
   }
-  
-  if (lerArquivo(nomeArquivo, numeros, tam) != 0) {
-    printf("Erro ao ler o arquivo.\n");
-    return 1;
+
+  for (int i = 0; i < 15; i++) {
+    printf("%.2f \n", numeros[i]);
   }
-  
+
   tempo = (fim - inicio) / CLOCKS_PER_SEC;
-  printf("Tempo de execução: %f segundos\n", tempo);
+  printf("Tempo de execução: %.2f segundos.\n", tempo);
 
   FILE *arquivo_resultados = fopen("resultados.txt", "a");
   if (arquivo_resultados == NULL) {
     printf("Erro ao abrir o arquivo resultados.txt\n");
     return 1;
   }
-  fprintf(
-      arquivo_resultados,
-      "Tempo de execução do arquivo %s usando o algorítimo %s: %f segundos\n",
-      nomeArquivo, nomeAlgoritimo, tempo);
+  fprintf(arquivo_resultados,
+          "Tempo de execução do arquivo %s usando o algoritimo %s: %.2f "
+          "segundos.\n",
+          nomeArquivo, nomeAlgoritimo, tempo);
   fclose(arquivo_resultados);
 }

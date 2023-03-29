@@ -5,6 +5,7 @@ int lerArquivo(char *nome_arquivo, double *numeros, int TAMANHO_MAXIMO);
 void bubbleSort(int tamanho, double *vetor);
 void insertSort(int tamanho, double *vetor);
 void selectionSort(int tamanho, double *vetor);
+void shellSort(int tamanho, double *vetor);
 void gerarCrescente(int tam);
 void gerarDecrescente(int tam);
 void gerarAleatorio(int tam, int max);

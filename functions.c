@@ -1,21 +1,21 @@
+#include "header.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "header.h"
 
 #define MAX_REGISTROS 1000
 
 void printaMenu() {
-  printf("\nDigite o tamanho do arquivo: ");
-  printf("\n1 para 500000\n2 para 750000\n3 para 1000000\n");
-}
-
-void printaMenu2() {
   printf("\nEscolha uma opção: \n");
   printf("1 - Gerar arquivo em ordem crescente\n");
   printf("2 - Gerar arquivo em ordem decrescente\n");
   printf("3 - Gerar arquivo em ordem aleatória\n");
+}
+
+void printaMenu2() {
+  printf("\nDigite o tamanho do arquivo: ");
+  printf("\n1 para 500000\n2 para 750000\n3 para 1000000\n");
 }
 
 void printaMenu3() {
@@ -23,6 +23,7 @@ void printaMenu3() {
   printf("1: BubbleSort\n");
   printf("2: InsertSort\n");
   printf("3: SelectionSort\n");
+  printf("4: ShellSort\n");
 }
 
 void bubbleSort(int tamanho, double *vetor) {
@@ -72,6 +73,22 @@ void selectionSort(int tamanho, double *vetor) {
   }
 }
 
+void shellSort(int tamanho, double *vetor) {
+  int h, i, j;
+  double aux;
+
+  for (h = tamanho / 2; h > 0; h /= 2) {
+    for (i = h; i < tamanho; i++) {
+      aux = vetor[i];
+      j = i;
+      while (j >= h && vetor[j - h] > aux) {
+        vetor[j] = vetor[j - h];
+        j -= h;
+      }
+      vetor[j] = aux;
+    }
+  }
+}
 
 int lerArquivo(char *nome_arquivo, double *numeros, int TAMANHO_MAXIMO) {
   int i = 0;
@@ -86,7 +103,7 @@ int lerArquivo(char *nome_arquivo, double *numeros, int TAMANHO_MAXIMO) {
   }
 
   while (i < TAMANHO_MAXIMO && fgets(linha, 100, arquivo) != NULL) {
-    numeros[i] = atof(linha); 
+    numeros[i] = atof(linha);
     i++;
   }
 
@@ -132,9 +149,9 @@ void gerarAleatorio(int tam, int max) {
   int numero;
 
   sprintf(nomeArquivo, "files/aleatório%d.txt", tam);
-  
+
   arquivo = fopen(nomeArquivo, "w");
-  
+
   srand(time(NULL));
 
   for (int i = 0; i < tam; i++) {
