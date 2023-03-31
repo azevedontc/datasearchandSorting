@@ -24,6 +24,7 @@ void printaMenu3() {
   printf("2: InsertSort\n");
   printf("3: SelectionSort\n");
   printf("4: ShellSort\n");
+  printf("5: QuickSort\n");
 }
 
 void bubbleSort(int tamanho, double *vetor) {
@@ -88,6 +89,33 @@ void shellSort(int tamanho, double *vetor) {
       vetor[j] = aux;
     }
   }
+}
+
+void quickSort(int tamanho, double *vetor) {
+    if (tamanho <= 1) {
+        return;
+    }
+    
+    double pivo = vetor[tamanho/2];
+    
+    int i, j;
+    for (i = 0, j = tamanho - 1; ; i++, j--) {
+        while (vetor[i] < pivo) {
+            i++;
+        }
+        while (vetor[j] > pivo) {
+            j--;
+        }
+        if (i >= j) {
+            break;
+        }
+        double temp = vetor[i];
+        vetor[i] = vetor[j];
+        vetor[j] = temp;
+    }
+    
+    quickSort(i, vetor);
+    quickSort(tamanho - i, vetor + i);
 }
 
 int lerArquivo(char *nome_arquivo, double *numeros, int TAMANHO_MAXIMO) {

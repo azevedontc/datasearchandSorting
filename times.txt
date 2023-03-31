@@ -1,0 +1,74 @@
+@ Algoritmo BubbleSort
+
+  Crescente:
+500k - 119 segundos
+750k - 182 segundos
+1M   - 350 segundos
+  Decrescente:
+500k - 104 segundos (Máquina UTFPR L13)
+750k - 272 segundos (Máquina UTFPR L13)
+1M   - 511 segundos (Máquina UTFPR L13)
+  Aleatório:
+500k - 469 segundos (Máquina UTFPR L15)
+750k - 1056 segundos
+1M   - 1966 segundos
+
+@ Algoritmo InsertSort
+
+  Crescente:
+500k - 0 segundos (Máquina UTFPR L15)
+750k - 0 segundos (Máquina UTFPR L15)
+1M   - 0 segundos (Máquina UTFPR L15)
+  Decrescente:
+500k - 149 segundos (Máquina UTFPR L15)
+750k - 
+1M   -
+  Aleatório:
+500k - 
+750k -
+1M   - 292 segundos
+
+@ Algoritmo SelectionSort
+
+  Crescente:
+500k - 83 segundos
+750k - 190 segundos
+1M   - 362 segundos
+  Decrescente:
+500k - 85 segundos
+750k - 184 segundos
+1M   - 359 segundos
+  Aleatório:
+500k - 96 segundos
+750k - 216 segundos
+1M   - 413 segundos
+
+@ Algoritmo ShellSort
+
+  Crescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Decrescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Aleatório:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+
+@ Algoritmo QuickSort
+
+  Crescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Decrescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Aleatório:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos

@@ -11,9 +11,11 @@ int main() {
   int tipoArquivo, opcaoAlgoritmo, tam, op;
   int quantidade_numeros = 0;
 
+  // Printa o menu do modelo de arquivo
   printaMenu();
   scanf("%d", &tipoArquivo);
 
+  // Printa o menu do tamanho do arquivo
   printaMenu2();
   scanf("%d", &op);
   switch (op) {
@@ -56,6 +58,7 @@ int main() {
     return 1;
   }
 
+  // Printa o menu da escolha do algoritmo
   printaMenu3();
   scanf("%d", &opcaoAlgoritmo);
   switch (opcaoAlgoritmo) {
@@ -86,6 +89,13 @@ int main() {
     fim = clock();
     sprintf(nomeAlgoritimo, "ShellSort");
     break;
+      
+  case 5:
+    inicio = clock();
+    quickSort(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "QuickSort");
+    break;
 
   default:
     printf("Opção inválida.\n");
@@ -99,14 +109,13 @@ int main() {
   tempo = (fim - inicio) / CLOCKS_PER_SEC;
   printf("Tempo de execução: %.2f segundos.\n", tempo);
 
-  FILE *arquivo_resultados = fopen("resultados.txt", "a");
-  if (arquivo_resultados == NULL) {
-    printf("Erro ao abrir o arquivo resultados.txt\n");
+  FILE *arquivo_results = fopen("results.txt", "a");
+  if (arquivo_results == NULL) {
+    printf("Erro ao abrir o arquivo results.txt\n");
     return 1;
   }
-  fprintf(arquivo_resultados,
-          "Tempo de execução do arquivo %s usando o algoritimo %s: %.2f "
-          "segundos.\n",
+  fprintf(arquivo_results,
+          "Tempo de execução do arquivo %s usando o algoritimo %s: %.2f segundos.\n",
           nomeArquivo, nomeAlgoritimo, tempo);
-  fclose(arquivo_resultados);
+  fclose(arquivo_results);
 }
