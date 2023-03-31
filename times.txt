@@ -21,11 +21,11 @@
 1M   - 0 segundos (Máquina UTFPR L15)
   Decrescente:
 500k - 149 segundos (Máquina UTFPR L15)
-750k - 
-1M   -
+750k - 298 segundos
+1M   - 562 segundos
   Aleatório:
-500k - 
-750k -
+500k - 75 segundos
+750k - 166 segundos
 1M   - 292 segundos
 
 @ Algoritmo SelectionSort
