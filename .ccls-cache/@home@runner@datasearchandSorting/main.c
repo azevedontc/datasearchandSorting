@@ -89,12 +89,33 @@ int main() {
     fim = clock();
     sprintf(nomeAlgoritimo, "ShellSort");
     break;
-      
+
   case 5:
     inicio = clock();
     quickSort(tam, numeros);
     fim = clock();
     sprintf(nomeAlgoritimo, "QuickSort");
+    break;
+
+  case 6:
+    inicio = clock();
+    quickSortHoare(numeros, tam);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "QuickSortHoare");
+    break;
+
+  case 7:
+    inicio = clock();
+    quickSortLomuto(numeros, tam);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "QuickSortLomuto");
+    break;
+
+  case 8:
+    inicio = clock();
+    mergeSort(numeros, 0, tam);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "MergeSort");
     break;
 
   default:
@@ -115,7 +136,8 @@ int main() {
     return 1;
   }
   fprintf(arquivo_results,
-          "Tempo de execução do arquivo %s usando o algoritimo %s: %.2f segundos.\n",
+          "Tempo de execução do arquivo %s usando o algoritimo %s: %.2f "
+          "segundos.\n",
           nomeArquivo, nomeAlgoritimo, tempo);
   fclose(arquivo_results);
 }

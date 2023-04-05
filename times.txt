@@ -72,3 +72,48 @@
 500k - 0 segundos
 750k - 0 segundos
 1M   - 0 segundos
+
+@ Algoritmo QuickSortHoare
+
+  Crescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Decrescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Aleatório:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+
+@ Algoritmo QuickSortLomuto
+
+  Crescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Decrescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Aleatório:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+
+@ Algoritmo MergeSort
+
+  Crescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Decrescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Aleatório:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos

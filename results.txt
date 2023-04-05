@@ -73,3 +73,10 @@ Tempo de execução do arquivo files/decrescente750000.txt usando o algoritimo I
 Tempo de execução do arquivo files/decrescente1000000.txt usando o algoritimo InsertSort: 562.00 segundos.
 Tempo de execução do arquivo files/aleatório500000.txt usando o algoritimo InsertSort: 75.00 segundos.
 Tempo de execução do arquivo files/aleatório750000.txt usando o algoritimo InsertSort: 166.00 segundos.
+Tempo de execução do arquivo files/crescente500000.txt usando o algoritimo QuickSortHoare: 0.00 segundos.
+Tempo de execução do arquivo files/aleatório1000000.txt usando o algoritimo QuickSortHoare: 0.00 segundos.
+Tempo de execução do arquivo files/aleatório1000000.txt usando o algoritimo QuickSort: 0.00 segundos.
+Tempo de execução do arquivo files/aleatório1000000.txt usando o algoritimo QuickSort: 0.00 segundos.
+Tempo de execução do arquivo files/aleatório1000000.txt usando o algoritimo QuickSortHoare: 0.00 segundos.
+Tempo de execução do arquivo files/aleatório1000000.txt usando o algoritimo QuickSortLomuto: 0.00 segundos.
+Tempo de execução do arquivo files/aleatório1000000.txt usando o algoritimo MergeSort: 0.00 segundos.
