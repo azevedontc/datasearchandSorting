@@ -7,7 +7,7 @@
 int main() {
   clock_t inicio, fim;
   char nomeArquivo[80], nomeAlgoritimo[80];
-  double tempo;
+  double results;
   int tipoArquivo, opcaoAlgoritmo, tam, op;
   int quantidade_numeros = 0;
 
@@ -58,7 +58,6 @@ int main() {
     return 1;
   }
 
-  // Printa o menu da escolha do algoritmo
   printaMenu3();
   scanf("%d", &opcaoAlgoritmo);
   switch (opcaoAlgoritmo) {
@@ -92,30 +91,30 @@ int main() {
 
   case 5:
     inicio = clock();
-    quickSort(tam, numeros);
-    fim = clock();
-    sprintf(nomeAlgoritimo, "QuickSort");
-    break;
-
-  case 6:
-    inicio = clock();
     quickSortHoare(numeros, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "QuickSortHoare");
     break;
 
-  case 7:
+  case 6:
     inicio = clock();
     quickSortLomuto(numeros, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "QuickSortLomuto");
     break;
 
-  case 8:
+  case 7:
     inicio = clock();
     mergeSort(numeros, 0, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "MergeSort");
+    break;
+
+  case 8:
+    inicio = clock();
+    radixSort(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "RadixSort");
     break;
 
   default:
@@ -127,8 +126,7 @@ int main() {
     printf("%.2f \n", numeros[i]);
   }
 
-  tempo = (fim - inicio) / CLOCKS_PER_SEC;
-  printf("Tempo de execução: %.2f segundos.\n", tempo);
+  double tempo_execucao = times(inicio);
 
   FILE *arquivo_results = fopen("results.txt", "a");
   if (arquivo_results == NULL) {
@@ -136,8 +134,8 @@ int main() {
     return 1;
   }
   fprintf(arquivo_results,
-          "Tempo de execução do arquivo %s usando o algoritimo %s: %.2f "
+          "Tempo de execução do arquivo %s usando o algoritimo %s: %.4f "
           "segundos.\n",
-          nomeArquivo, nomeAlgoritimo, tempo);
+          nomeArquivo, nomeAlgoritimo, tempo_execucao);
   fclose(arquivo_results);
 }

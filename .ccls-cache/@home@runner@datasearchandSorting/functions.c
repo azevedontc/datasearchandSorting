@@ -24,10 +24,10 @@ void printaMenu3() {
   printf("2: InsertSort\n");
   printf("3: SelectionSort\n");
   printf("4: ShellSort\n");
-  printf("5: QuickSort\n");
-  printf("6: QuickSortHoare\n");
-  printf("7: QuickSortLomuto\n");
-  printf("8: MergeSort\n");
+  printf("5: QuickSortHoare\n");
+  printf("6: QuickSortLomuto\n");
+  printf("7: MergeSort\n");
+  printf("8: RadixSort\n");
 }
 
 int lerArquivo(char *nome_arquivo, double *numeros, int TAMANHO_MAXIMO) {
@@ -101,6 +101,15 @@ void gerarAleatorio(int tam, int max) {
   fclose(arquivo);
 }
 
+double times(clock_t inicio) {
+  clock_t fim = clock();
+  double tempo;
+  tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+  printf("Tempo de execução: %.4f segundos.\n", tempo);
+  return tempo;
+}
+
+
 void bubbleSort(int tamanho, double *vetor) {
   int i, j;
   double temp;
@@ -165,33 +174,6 @@ void shellSort(int tamanho, double *vetor) {
   }
 }
 
-void quickSort(int tamanho, double *vetor) {
-  if (tamanho <= 1) {
-    return;
-  }
-
-  double pivo = vetor[tamanho / 2];
-
-  int i, j;
-  for (i = 0, j = tamanho - 1;; i++, j--) {
-    while (vetor[i] < pivo) {
-      i++;
-    }
-    while (vetor[j] > pivo) {
-      j--;
-    }
-    if (i >= j) {
-      break;
-    }
-    double temp = vetor[i];
-    vetor[i] = vetor[j];
-    vetor[j] = temp;
-  }
-
-  quickSort(i, vetor);
-  quickSort(tamanho - i, vetor + i);
-}
-
 int partitionHoare(double *vetor, int tam) {
   int x = vetor[tam / 2];
   int esq, dir;
@@ -222,9 +204,7 @@ void hoare(double *vetor, int tam) {
   }
 }
 
-void quickSortHoare(double *vetor, int tam) {
-  hoare(vetor, tam); 
-}
+void quickSortHoare(double *vetor, int tam) { hoare(vetor, tam); }
 
 int partitionLomuto(double arr[], int low, int high) {
   int pivot = arr[high];
@@ -256,9 +236,7 @@ void lomuto(double arr[], int low, int high) {
   }
 }
 
-double quickSortLomuto(double *vetor, int tam) {
-  lomuto(vetor, 0, tam - 1); 
-}
+double quickSortLomuto(double *vetor, int tam) { lomuto(vetor, 0, tam - 1); }
 
 void merge(double *v, double *c, int i, int m, int f) {
   int z, iv = i, ic = m + 1;
@@ -298,4 +276,33 @@ void mergeSort(double *vetor, int esq, int dir) {
   double *c = malloc(sizeof(double) * (dir - esq + 1));
   sort(vetor, c, esq, dir);
   free(c);
+}
+
+void radixSort(int tamanho, double *vetor) {
+  int i, exp = 1;
+  double *temp = (double *)malloc(tamanho * sizeof(double));
+  double maior = vetor[0];
+
+  for (i = 1; i < tamanho; i++) {
+    if (vetor[i] > maior) {
+      maior = vetor[i];
+    }
+  }
+  while ((int)(maior / exp) > 0) {
+    int bucket[10] = {0};
+    for (i = 0; i < tamanho; i++) {
+      bucket[(int)(vetor[i] / exp) % 10]++;
+    }
+    for (i = 1; i < 10; i++) {
+      bucket[i] += bucket[i - 1];
+    }
+    for (i = tamanho - 1; i >= 0; i--) {
+      temp[--bucket[(int)(vetor[i] / exp) % 10]] = vetor[i];
+    }
+    for (i = 0; i < tamanho; i++) {
+      vetor[i] = temp[i];
+    }
+    exp *= 10;
+  }
+  free(temp);
 }
