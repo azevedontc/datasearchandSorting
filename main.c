@@ -1,72 +1,141 @@
-#include <stdio.h>
 #include "header.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
 int main() {
-  int opcao = 0;
-  int valor = 0;
-  int i, array[10];
-  int n = sizeof(array) / sizeof(array[0]);
-  
-  while (opcao != 5) {
-    printf("\nEscolha uma opcao:\n\n");
-<<<<<<< HEAD
-    printf("1 - Ler arquivo txt e guardar no Vetor\n");
-=======
-    printf("1 - Ler Arquivo txt e guardar no Vetor\n");
->>>>>>> a1016d252cc35d460c87b2442708743f5f47ca1b
-    printf("2 - Criar Arquivo txt ordenado\n");
-    printf("3 - BubbleSort\n");
-    printf("4 - InsertSort\n");
-    printf("5 - Sair\n");
-    scanf("%d", &opcao);
-    switch (opcao) {
-      case 1:
-      printf("Numeros lidos no arquivo .txt: \n");
-      lerTxt();
-      printf("\n");
-      break;
-      
-      case 2:
-      printf("Digite qual valor voce quer ordenado no arquivo txt: \n");
-      scanf("%d", &valor);
-      criartxtOrdenado(valor);
-      printf("\n");
-      break;
+  clock_t inicio, fim;
+  char nomeArquivo[80], nomeAlgoritimo[80];
+  double results;
+  int tipoArquivo, opcaoAlgoritmo, tam, op;
+  int quantidade_numeros = 0;
 
-      case 3:
-      for(i = 0; i < 10; i++){ // preenche o vetor lendo do teclado
-        printf("Digite o elemento da posicao %d: ", i);
-        scanf("%d", &array[i]);
-      }       
-      bubbleSort(array, n);
-      // bubblesort vai ordenar valores fornecidos pelo usuario
-      printf("\nArray ordenado: \n");
-      for (int i = 0; i < n; i++)
-      printf("%d ", array[i]);
-      printf("\n");
-      break;
+  // Printa o menu do modelo de arquivo
+  printaMenu();
+  scanf("%d", &tipoArquivo);
 
-      case 4:
-      for(i = 0; i < 10; i++){ // preenche o vetor lendo do teclado
-        printf("Digite o elemento da posicao %d: ", i);
-        scanf("%d", &array[i]);
-      } 
-      insertionSort(array, n); 
-      // insertsort vai ordenar valores fornecidos pelo usuario
-      printf("\nArray ordenado: \n");
-      for (int i = 0; i < n; i++)
-      printf("%d ", array[i]);
-      printf("\n");
-      break;
-
-      case 5:
-      printf("Saindo...\n");
-      break;
-      
-      default:
-      printf("Opcao invalida. Tente novamente.\n");
-      break;
-      }
+  // Printa o menu do tamanho do arquivo
+  printaMenu2();
+  scanf("%d", &op);
+  switch (op) {
+  case 1:
+    tam = 500000;
+    break;
+  case 2:
+    tam = 750000;
+    break;
+  case 3:
+    tam = 1000000;
+    break;
+  default:
+    tam = 500000;
+    break;
   }
-  return 0;
+
+  double *numeros = malloc(tam * sizeof(double));
+
+  switch (tipoArquivo) {
+  case 1:
+    gerarCrescente(tam);
+    sprintf(nomeArquivo, "files/crescente%d.txt", tam);
+    break;
+  case 2:
+    gerarDecrescente(tam);
+    sprintf(nomeArquivo, "files/decrescente%d.txt", tam);
+    break;
+  case 3:
+    sprintf(nomeArquivo, "files/aleatório%d.txt", tam);
+    gerarAleatorio(tam, tam);
+    break;
+  default:
+    printf("Opção inválida!\n");
+    break;
+  }
+
+  if (lerArquivo(nomeArquivo, numeros, tam) != 0) {
+    printf("Erro ao ler o arquivo!\n");
+    return 1;
+  }
+
+  printaMenu3();
+  scanf("%d", &opcaoAlgoritmo);
+  switch (opcaoAlgoritmo) {
+  case 1:
+    inicio = clock();
+    bubbleSort(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "BublleSort");
+    break;
+
+  case 2:
+    inicio = clock();
+    insertSort(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "InsertSort");
+    break;
+
+  case 3:
+    inicio = clock();
+    selectionSort(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "SelectionSort");
+    break;
+
+  case 4:
+    inicio = clock();
+    shellSort(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "ShellSort");
+    break;
+
+  case 5:
+    inicio = clock();
+    quickSortHoare(numeros, tam);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "QuickSortHoare");
+    break;
+
+  case 6:
+    inicio = clock();
+    quickSortLomuto(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "QuickSortLomuto");
+    break;
+
+  case 7:
+    inicio = clock();
+    mergeSort(numeros, 0, tam);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "MergeSort");
+    break;
+
+  case 8:
+    inicio = clock();
+    radixSort(tam, numeros);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "RadixSort");
+    break;
+
+  default:
+    printf("Opção inválida.\n");
+    break;
+  }
+
+  for (int i = 0; i < 15; i++) {
+    printf("%.2f \n", numeros[i]);
+  }
+
+  double tempo_execucao = times(inicio);
+
+  FILE *arquivo_results = fopen("results.txt", "a");
+  if (arquivo_results == NULL) {
+    printf("Erro ao abrir o arquivo results.txt\n");
+    return 1;
+  }
+  fprintf(arquivo_results,
+          "Tempo de execução do arquivo %s usando o algoritimo %s: %.4f "
+          "segundos.\n",
+          nomeArquivo, nomeAlgoritimo, tempo_execucao);
+  fclose(arquivo_results);
 }

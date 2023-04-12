@@ -1,0 +1,119 @@
+@ Algoritmo BubbleSort
+
+  Crescente:
+500k - 119 segundos
+750k - 182 segundos
+1M   - 350 segundos
+  Decrescente:
+500k - 104 segundos
+750k - 272 segundos
+1M   - 511 segundos
+  Aleatório:
+500k - 469 segundos
+750k - 1056 segundos
+1M   - 1966 segundos
+
+@ Algoritmo InsertSort
+
+  Crescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Decrescente:
+500k - 149 segundos
+750k - 298 segundos
+1M   - 562 segundos
+  Aleatório:
+500k - 75 segundos
+750k - 166 segundos
+1M   - 292 segundos
+
+@ Algoritmo SelectionSort
+
+  Crescente:
+500k - 83 segundos
+750k - 190 segundos
+1M   - 362 segundos
+  Decrescente:
+500k - 85 segundos
+750k - 184 segundos
+1M   - 359 segundos
+  Aleatório:
+500k - 96 segundos
+750k - 216 segundos
+1M   - 413 segundos
+
+@ Algoritmo ShellSort
+
+  Crescente:
+500k - 0.0128 segundos
+750k - 0.0223 segundos
+1M   - 0.0230 segundos
+  Decrescente:
+500k - 0.0142 segundos
+750k - 0.0243 segundos
+1M   - 0.0385 segundos
+  Aleatório:
+500k - 0.1085 segundos
+750k - 0.1718 segundos
+1M   - 0.2375 segundos
+
+@ Algoritmo QuickSortHoare
+
+  Crescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Decrescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Aleatório:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+
+@ Algoritmo QuickSortLomuto
+
+  Crescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Decrescente:
+500k - 0 segundos
+750k - 0 segundos
+1M   - 0 segundos
+  Aleatório:
+500k - 0.0879 segundos
+750k - 0.1215 segundos
+1M   - 0.2079 segundos
+
+@ Algoritmo MergeSort
+
+  Crescente:
+500k - 0.0196 segundos
+750k - 0.0310 segundos
+1M   - 0.0475 segundos
+  Decrescente:
+500k - 0.0691 segundos
+750k - 0.1035 segundos
+1M   - 0.1242 segundos
+  Aleatório:
+500k - 0.1314 segundos
+750k - 0.2285 segundos
+1M   - 0.3444 segundos
+
+@ Algoritmo RadixSort
+
+  Crescente:
+500k - 0.1363 segundos
+750k - 0.1984 segundos
+1M   - 0.3196 segundos
+  Decrescente:
+500k - 0.1210 segundos
+750k - 0.2103 segundos
+1M   - 0.3162 segundos
+  Aleatório:
+500k - 0.1191 segundos
+750k - 0.1691 segundos
+1M   - 0.2915 segundos
