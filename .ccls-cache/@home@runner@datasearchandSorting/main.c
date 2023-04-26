@@ -8,7 +8,7 @@ int main() {
   clock_t inicio, fim;
   char nomeArquivo[80], nomeAlgoritimo[80];
   double results;
-  int tipoArquivo, opcaoAlgoritmo, tam, op;
+  int tipoArquivo, opcaoAlgoritmo, tam, op, search, operacoes = 0;
   int quantidade_numeros = 0;
 
   // Printa o menu do modelo de arquivo
@@ -29,7 +29,7 @@ int main() {
     tam = 1000000;
     break;
   default:
-    tam = 500000;
+    tam = 15;
     break;
   }
 
@@ -63,28 +63,28 @@ int main() {
   switch (opcaoAlgoritmo) {
   case 1:
     inicio = clock();
-    bubbleSort(tam, numeros);
+    bubbleSort(numeros, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "BublleSort");
     break;
 
   case 2:
     inicio = clock();
-    insertSort(tam, numeros);
+    insertSort(numeros, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "InsertSort");
     break;
 
   case 3:
     inicio = clock();
-    selectionSort(tam, numeros);
+    selectionSort(numeros, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "SelectionSort");
     break;
 
   case 4:
     inicio = clock();
-    shellSort(tam, numeros);
+    shellSort(numeros, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "ShellSort");
     break;
@@ -98,7 +98,7 @@ int main() {
 
   case 6:
     inicio = clock();
-    quickSortLomuto(tam, numeros);
+    quickSortLomuto(numeros, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "QuickSortLomuto");
     break;
@@ -112,9 +112,16 @@ int main() {
 
   case 8:
     inicio = clock();
-    radixSort(tam, numeros);
+    radixSort(numeros, tam);
     fim = clock();
     sprintf(nomeAlgoritimo, "RadixSort");
+    break;
+
+  case 9:
+    inicio = clock();
+    heapSort(numeros, tam);
+    fim = clock();
+    sprintf(nomeAlgoritimo, "HeapSort");
     break;
 
   default:
@@ -122,12 +129,16 @@ int main() {
     break;
   }
 
+  // Printa 15 números para verificação da funcionalidade do algoritmo
+  printf("\n");
   for (int i = 0; i < 15; i++) {
     printf("%.2f \n", numeros[i]);
   }
+  printf("\n");
 
   double tempo_execucao = times(inicio);
-
+  
+  // Printa o resultado da execução no arquivo "results.txt"
   FILE *arquivo_results = fopen("results.txt", "a");
   if (arquivo_results == NULL) {
     printf("Erro ao abrir o arquivo results.txt\n");
@@ -138,4 +149,15 @@ int main() {
           "segundos.\n",
           nomeArquivo, nomeAlgoritimo, tempo_execucao);
   fclose(arquivo_results);
+
+// --------------------------------------------------
+// SEARCH - PESQUISA
+// --------------------------------------------------
+
+  inicio = clock();
+  printf("\nQual número buscar? \n");
+  scanf("%d", &search);
+  buscaBinaria(numeros, 0, tam-1, search, &operacoes);
+  fim = clock();
+  printf("\nA quantidade de operações para encontrar o valor: %d foi de: %d operações", search, operacoes);
 }

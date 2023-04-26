@@ -24,10 +24,11 @@ void printaMenu3() {
   printf("2: InsertSort\n");
   printf("3: SelectionSort\n");
   printf("4: ShellSort\n");
-  printf("5: QuickSortHoare\n");
-  printf("6: QuickSortLomuto\n");
+  printf("5: QuickSort Hoare\n");
+  printf("6: QuickSort Lomuto\n");
   printf("7: MergeSort\n");
   printf("8: RadixSort\n");
+  printf("9: HeapSort\n");
 }
 
 int lerArquivo(char *nome_arquivo, double *numeros, int TAMANHO_MAXIMO) {
@@ -109,8 +110,11 @@ double times(clock_t inicio) {
   return tempo;
 }
 
+// --------------------------------------------------
+// SORT - ORDENAÇÃO
+// --------------------------------------------------
 
-void bubbleSort(int tamanho, double *vetor) {
+void bubbleSort(double *vetor, int tamanho) {
   int i, j;
   double temp;
   for (i = 0; i < tamanho - 1; i++) {
@@ -124,7 +128,7 @@ void bubbleSort(int tamanho, double *vetor) {
   }
 }
 
-void insertSort(int tamanho, double *vetor) {
+void insertSort(double *vetor, int tamanho) {
   int i, j;
   double temp;
   for (i = 1; i < tamanho; i++) {
@@ -138,7 +142,7 @@ void insertSort(int tamanho, double *vetor) {
   }
 }
 
-void selectionSort(int tamanho, double *vetor) {
+void selectionSort(double *vetor, int tamanho) {
   int i, j, pos_menor;
   double temp;
 
@@ -157,19 +161,19 @@ void selectionSort(int tamanho, double *vetor) {
   }
 }
 
-void shellSort(int tamanho, double *vetor) {
-  int h, i, j;
-  double aux;
+void shellSort(double *vetor, int tamanho) {
+  int h, i, j;                                  // 1
+  double aux;                                   // 1
 
-  for (h = tamanho / 2; h > 0; h /= 2) {
-    for (i = h; i < tamanho; i++) {
-      aux = vetor[i];
-      j = i;
-      while (j >= h && vetor[j - h] > aux) {
-        vetor[j] = vetor[j - h];
-        j -= h;
+  for (h = tamanho / 2; h > 0; h /= 2) {        // log(tamanho) + 1
+    for (i = h; i < tamanho; i++) {             // log(tamanho) - 1
+      aux = vetor[i];                           // (tamanho / h) - 1
+      j = i;                                    // (tamanho / h) - 1
+      while (j >= h && vetor[j - h] > aux) {    // (tamanho / h) - 1
+        vetor[j] = vetor[j - h];                // varia de (tamanho / h) - 1 a (tamanho - 1)
+        j -= h;                                 // varia de (tamanho / h) - 1 a (tamanho - 1)
       }
-      vetor[j] = aux;
+      vetor[j] = aux;                           // (tamanho / h) - 1
     }
   }
 }
@@ -206,36 +210,37 @@ void hoare(double *vetor, int tam) {
 
 void quickSortHoare(double *vetor, int tam) { hoare(vetor, tam); }
 
-void trocar(double *a, double *b) {
-  double temp = *a;
-  *a = *b;
-  *b = temp;
-}
-
-int particao(double *vetor, int ini, int fim) {
-  double pivo = vetor[fim];
-  int i = ini - 1;
-
-  for (int j = ini; j < fim; j++) {
-    if (vetor[j] <= pivo) {
+int partitionLomuto(double arr[], int low, int high) {
+  int pivot = arr[high];
+  int i = low - 1;
+  for (int j = low; j < high; j++) {
+    if (arr[j] <= pivot) {
       i++;
-      trocar(&vetor[i], &vetor[j]);
+      int tmp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = tmp;
     }
   }
-
-  trocar(&vetor[i + 1], &vetor[fim]);
-  return i + 1;
+  int tmp = arr[i + 1];
+  arr[i + 1] = arr[high];
+  arr[high] = tmp;
+  return (i + 1);
 }
 
-void quickSortLomuto(int tamanho, double *vetor) {
-  if (tamanho < 2)
-    return;
-
-  int p = particao(vetor, 0, tamanho - 1);
-  quickSortLomuto(p, vetor);
-  quickSortLomuto(tamanho - p - 1, vetor + p + 1);
+void lomuto(double arr[], int low, int high) {
+  while (low < high) {
+    int index = partitionLomuto(arr, low, high);
+    if ((index - low) <= (high - index)) {
+      lomuto(arr, low, index - 1);
+      low = index + 1;
+    } else {
+      lomuto(arr, index + 1, high);
+      high = index - 1;
+    }
+  }
 }
 
+double quickSortLomuto(double *vetor, int tam) { lomuto(vetor, 0, tam - 1); }
 
 void merge(double *v, double *c, int i, int m, int f) {
   int z, iv = i, ic = m + 1;
@@ -277,7 +282,7 @@ void mergeSort(double *vetor, int esq, int dir) {
   free(c);
 }
 
-void radixSort(int tamanho, double *vetor) {
+void radixSort(double *vetor, int tamanho) {
   int i, exp = 1;
   double *temp = (double *)malloc(tamanho * sizeof(double));
   double maior = vetor[0];
@@ -304,4 +309,57 @@ void radixSort(int tamanho, double *vetor) {
     exp *= 10;
   }
   free(temp);
+}
+
+void heapify(double *vetor, int tamanho, int i) {
+  int maior = i;
+  int esquerda = 2 * i + 1;
+  int direita = 2 * i + 2;
+
+  if (esquerda < tamanho && vetor[esquerda] > vetor[maior])
+    maior = esquerda;
+
+  if (direita < tamanho && vetor[direita] > vetor[maior])
+    maior = direita;
+
+  if (maior != i) {
+    double temp = vetor[i];
+    vetor[i] = vetor[maior];
+    vetor[maior] = temp;
+
+    heapify(vetor, tamanho, maior);
+  }
+}
+
+void heapSort(double *vetor, int tamanho) {
+  for (int i = tamanho / 2 - 1; i >= 0; i--)
+    heapify(vetor, tamanho, i);
+
+  for (int i = tamanho - 1; i >= 0; i--) {
+    double temp = vetor[0];
+    vetor[0] = vetor[i];
+    vetor[i] = temp;
+
+    heapify(vetor, i, 0);
+  }
+}
+
+// --------------------------------------------------
+// SEARCH - PESQUISA
+// --------------------------------------------------
+
+double buscaBinaria(double vetor[], int ini, int fim, int key, int *operacoes){
+  *operacoes+=1;
+  int mei = (ini + fim) / 2;
+
+  if ((ini == fim) && !(key == vetor[mei]))
+    return -1;
+  else
+    if (key == vetor[mei])
+      return mei;
+    else
+      if (key > vetor[mei])
+        return buscaBinaria(vetor, mei+1, fim , key, operacoes);
+      else
+        return buscaBinaria(vetor, ini, mei-1, key, operacoes);
 }

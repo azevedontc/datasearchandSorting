@@ -61,17 +61,17 @@
 @ Algoritmo QuickSortHoare
 
   Crescente:
-500k - 0 segundos
-750k - 0 segundos
-1M   - 0 segundos
+500k - 0.0128 segundos
+750k - 0.0174 segundos
+1M   - 0.0261 segundos
   Decrescente:
-500k - 0 segundos
-750k - 0 segundos
-1M   - 0 segundos
+500k - 0.0112 segundos
+750k - 0.0115 segundos
+1M   - 0.0279 segundos
   Aleatório:
-500k - 0 segundos
-750k - 0 segundos
-1M   - 0 segundos
+500k - 0.0638 segundos
+750k - 0.0929 segundos
+1M   - 0.1241 segundos
 
 @ Algoritmo QuickSortLomuto
 
@@ -117,3 +117,18 @@
 500k - 0.1191 segundos
 750k - 0.1691 segundos
 1M   - 0.2915 segundos
+
+@ Algoritmo HeapSort
+
+  Crescente:
+500k - 0.0466 segundos
+750k - 0.0679 segundos
+1M   - 0.0954 segundos
+  Decrescente:
+500k - 0.0538 segundos
+750k - 0.0870 segundos
+1M   - 0.1122 segundos
+  Aleatório:
+500k - 0.1172 segundos
+750k - 0.2297 segundos
+1M   - 0.3008 segundos
